@@ -1,2 +1,13 @@
 Listado de alumnos que cursaron materias juntos, pero en esta materia son de distintos
 grupos.
+
+MATCH (p:Persona) -[rPA:ES_UN]->(a:Alumno) -[r:CURSA]->(c:Curso)
+RETURN p.apellido, p.nombre, a.matricula, r.grupo, c.codigo
+ORDER BY c.codigo, r.grupo
+
+Listado de docentes que dictaron más de una materia.
+
+MATCH (p:Persona) -[rPD:ES_UN]->(d:Docente) -[rDC:DICTA]->(c:Curso)
+with p, count(rDC) as cantidadCursos
+where cantidadCursos > 1
+RETURN p.apellido, p.nombre, cantidadCursos 

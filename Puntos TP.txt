@@ -1,15 +1,15 @@
 (OK) 1. Listado de alumnos que cursaron materias juntos, pero en esta materia son de distintos
 grupos.
-(OK) 2. Listado de docentes que dictaron más de una materia.
-(OK) 3. Tu propio promedio de calificaciones.
-(OK) 4. Listado para recomendación de alumnos que cursaron en el mismo curso y cuatrimestre
+2. Listado de docentes que dictaron más de una materia.
+3. Tu propio promedio de calificaciones.
+4. Listado para recomendación de alumnos que cursaron en el mismo curso y cuatrimestre
 pero no se conocen entre sí.
-(OK) 5. Listado de los conocidos de tus conocidos, hasta longitud 2, e indefinida.
-(OK) 6. Apellido y nombre de alumnos que también son docentes (ver pedido adicional para esta
+5. Listado de los conocidos de tus conocidos, hasta longitud 2, e indefinida.
+6. Apellido y nombre de alumnos que también son docentes (ver pedido adicional para esta
 consulta).
-(OK) 7. Dado un alumno en particular, se quiere obtener el listado de materias electivas que no
+7. Dado un alumno en particular, se quiere obtener el listado de materias electivas que no
 haya cursado, en base al criterio de haber sido cursadas por otros alumnos que cursaron
 por lo menos una en común con él.
-(OK) 8. Hacer una variante del ítem anterior, recomendando sólo si el otro alumno es un contacto
+8. Hacer una variante del ítem anterior, recomendando sólo si el otro alumno es un contacto
 (directo o indirecto).
 9. Consulta adicional, decidida por el alumno.
