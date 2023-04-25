@@ -1,0 +1,2 @@
+Listado de alumnos que cursaron materias juntos, pero en esta materia son de distintos
+grupos.

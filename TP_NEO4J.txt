@@ -1,0 +1,129 @@
+CREATE 
+ (Q: Materia { id: "1", nombre: "Quimica", tipo: "curricular" }),
+ (F: Materia { id: "2", nombre: "Fisica", tipo: "curricular" }),
+ (M: Materia { id: "3", nombre: "Matematica", tipo: "curricular" }),
+ (L: Materia { id: "4", nombre: "Logica", tipo: "optativa" }),
+ (E: Materia { id: "5", nombre: "Estadistica", tipo: "optativa" }); 
+
+CREATE 
+ (C1: Curso { codigo: "Q001", aula: "1" }),
+ (C2: Curso { codigo: "Q002", aula: "2" }),
+ (C3: Curso { codigo: "F001", aula: "3" }),
+ (C4: Curso { codigo: "M001", aula: "1" }),
+ (C5: Curso { codigo: "M002", aula: "3" }),
+ (C6: Curso { codigo: "L001", aula: "4" }),
+ (C7: Curso { codigo: "E001", aula: "5" });
+
+MATCH (Q: Materia { id: "1" }), (C1: Curso { codigo: "Q001" }) CREATE (Q)-[:OFERTA { turno: "noche" } ]->(C1);
+MATCH (Q: Materia { id: "1" }), (C2: Curso { codigo: "Q002" }) CREATE (Q)-[:OFERTA { turno: "tarde" } ]->(C2);
+MATCH (F: Materia { id: "2" }), (C3: Curso { codigo: "F001" }) CREATE (F)-[:OFERTA { turno: "tarde" } ]->(C3);
+MATCH (M: Materia { id: "3" }), (C4: Curso { codigo: "M001" }) CREATE (M)-[:OFERTA { turno: "tarde" } ]->(C4);
+MATCH (M: Materia { id: "3" }), (C5: Curso { codigo: "M002" }) CREATE (M)-[:OFERTA { turno: "noche" } ]->(C5);
+MATCH (L: Materia { id: "4" }), (C6: Curso { codigo: "L001" }) CREATE (L)-[:OFERTA { turno: "tarde" } ]->(C6);
+MATCH (E: Materia { id: "5" }), (C7: Curso { codigo: "E001" }) CREATE (E)-[:OFERTA { turno: "noche" } ]->(C7);
+
+CREATE 
+ (C12022: Cuatrimestre { id: "1", cuatrimestre: "1", anio: "2022" }),
+ (C22022: Cuatrimestre { id: "2", cuatrimestre: "2", anio: "2022" }); 
+
+MATCH (C1: Curso { codigo: "Q001" }), (C12022: Cuatrimestre { id: "1" }) CREATE (C1)-[:SE_DICTA_EN { tipo: "cuatrimestral" } ]->(C12022);
+MATCH (C2: Curso { codigo: "Q002" }), (C12022: Cuatrimestre { id: "1" }) CREATE (C2)-[:SE_DICTA_EN { tipo: "cuatrimestral" } ]->(C12022);
+MATCH (C3: Curso { codigo: "F001" }), (C12022: Cuatrimestre { id: "1" }) CREATE (C3)-[:SE_DICTA_EN { tipo: "cuatrimestral" } ]->(C12022);
+MATCH (C4: Curso { codigo: "M001" }), (C22022: Cuatrimestre { id: "2" }) CREATE (C4)-[:SE_DICTA_EN { tipo: "cuatrimestral" } ]->(C22022);
+MATCH (C5: Curso { codigo: "M002" }), (C22022: Cuatrimestre { id: "2" }) CREATE (C5)-[:SE_DICTA_EN { tipo: "cuatrimestral" } ]->(C22022);
+MATCH (C6: Curso { codigo: "L001" }), (C22022: Cuatrimestre { id: "2" }) CREATE (C6)-[:SE_DICTA_EN { tipo: "cuatrimestral" } ]->(C22022);
+MATCH (C7: Curso { codigo: "E001" }), (C22022: Cuatrimestre { id: "2" }) CREATE (C7)-[:SE_DICTA_EN { tipo: "cuatrimestral" } ]->(C22022);
+
+CREATE 
+ (P1: Persona { dni: "11111111", apellido: "Siciliano", nombre: "Gustavo", fechanac: "10/10/1990" }),
+ (P2: Persona { dni: "22222222", apellido: "Gomez", nombre: "Jose", fechanac: "01/01/1980" }),
+ (P3: Persona { dni: "33333333", apellido: "Dominguez", nombre: "Luis", fechanac: "31/10/1990" }),
+ (P4: Persona { dni: "44444444", apellido: "Dominguez", nombre: "Estela", fechanac: "01/01/1980" }),
+ (P5: Persona { dni: "55555555", apellido: "Ruiz", nombre: "Martina", fechanac: "31/10/1990" }),
+ (P6: Persona { dni: "66666666", apellido: "Rodriguez", nombre: "Guido", fechanac: "01/01/1980" }),
+ (P7: Persona { dni: "77777777", apellido: "Gomez", nombre: "Lucia", fechanac: "31/10/1990" }),
+ (P8: Persona { dni: "88888888", apellido: "Perez", nombre: "Lucia", fechanac: "28/02/1968" }),
+ (P9: Persona { dni: "99999999", apellido: "Milito", nombre: "Alberto", fechanac: "28/12/1980" });
+
+CREATE 
+ (GS: Alumno { matricula: "1001", carrera: "ing exactas" }),
+ (JG: Alumno { matricula: "1002", carrera: "ing exactas" }),
+ (LD: Alumno { matricula: "1003", carrera: "ing exactas" }),
+ (ED: Alumno { matricula: "1004", carrera: "ing exactas" }),
+ (MR: Alumno { matricula: "1005", carrera: "ing exactas" }),
+ (GR: Alumno { matricula: "1006", carrera: "ing exactas" }),
+ (LG: Alumno { matricula: "1007", carrera: "ing exactas" }),
+ (LP: Alumno { matricula: "1008", carrera: "ing exactas" }),
+ (DM: Alumno { matricula: "1009", carrera: "ing exactas" });
+
+MATCH (P1: Persona { dni: "11111111" }), (A1: Alumno { matricula: "1001" }) CREATE (P1)-[:ES_UN { desde: "01/02/2022" } ]->(A1);
+MATCH (P2: Persona { dni: "22222222" }), (A2: Alumno { matricula: "1002" }) CREATE (P2)-[:ES_UN { desde: "01/02/2022" } ]->(A2);
+MATCH (P3: Persona { dni: "33333333" }), (A3: Alumno { matricula: "1003" }) CREATE (P3)-[:ES_UN { desde: "01/02/2022" } ]->(A3);
+MATCH (P4: Persona { dni: "44444444" }), (A4: Alumno { matricula: "1004" }) CREATE (P4)-[:ES_UN { desde: "01/02/2022" } ]->(A4);
+MATCH (P5: Persona { dni: "55555555" }), (A5: Alumno { matricula: "1005" }) CREATE (P5)-[:ES_UN { desde: "01/02/2022" } ]->(A5);
+MATCH (P6: Persona { dni: "66666666" }), (A6: Alumno { matricula: "1006" }) CREATE (P6)-[:ES_UN { desde: "01/02/2022" } ]->(A6);
+MATCH (P7: Persona { dni: "77777777" }), (A7: Alumno { matricula: "1007" }) CREATE (P7)-[:ES_UN { desde: "01/02/2022" } ]->(A7);
+MATCH (P8: Persona { dni: "88888888" }), (A8: Alumno { matricula: "1008" }) CREATE (P8)-[:ES_UN { desde: "01/02/2022" } ]->(A8);
+MATCH (P9: Persona { dni: "99999999" }), (A9: Alumno { matricula: "1009" }) CREATE (P9)-[:ES_UN { desde: "01/02/2020" } ]->(A9);
+
+MATCH (GS: Alumno { matricula: "1001"}), (C1: Curso { codigo: "Q001"} ) CREATE (GS)-[:CURSA { grupo: "1", nota_grupal: "8", nota_final: "8" } ]->(C1);
+MATCH (JG: Alumno { matricula: "1002"}), (C1: Curso { codigo: "Q001"} ) CREATE (JG)-[:CURSA { grupo: "1", nota_grupal: "8", nota_final: "9" } ]->(C1);
+MATCH (LD: Alumno { matricula: "1003"}), (C1: Curso { codigo: "Q001"} ) CREATE (LD)-[:CURSA { grupo: "2", nota_grupal: "10", nota_final: "10" } ]->(C1);
+MATCH (ED: Alumno { matricula: "1004"}), (C1: Curso { codigo: "Q001"} ) CREATE (ED)-[:CURSA { grupo: "2", nota_grupal: "10", nota_final: "2" } ]->(C1);
+MATCH (MR: Alumno { matricula: "1005"}), (C2: Curso { codigo: "Q002"} ) CREATE (MR)-[:CURSA { grupo: "1", nota_grupal: "10", nota_final: "10" } ]->(C2);
+MATCH (GR: Alumno { matricula: "1006"}), (C2: Curso { codigo: "Q002"} ) CREATE (GR)-[:CURSA { grupo: "1", nota_grupal: "10", nota_final: "10" } ]->(C2);
+MATCH (LG: Alumno { matricula: "1007"}), (C2: Curso { codigo: "Q002"} ) CREATE (LG)-[:CURSA { grupo: "2", nota_grupal: "8", nota_final: "8" } ]->(C2);
+MATCH (LP: Alumno { matricula: "1008"}), (C2: Curso { codigo: "Q002"} ) CREATE (LP)-[:CURSA { grupo: "2", nota_grupal: "8", nota_final: "8" } ]->(C2);
+
+MATCH (GS: Alumno { matricula: "1001"}), (C3: Curso { codigo: "F001"} ) CREATE (GS)-[:CURSA { grupo: "1", nota_grupal: "8", nota_final: "8" } ]->(C3);
+MATCH (JG: Alumno { matricula: "1002"}), (C3: Curso { codigo: "F001"} ) CREATE (JG)-[:CURSA { grupo: "1", nota_grupal: "8", nota_final: "9" } ]->(C3);
+MATCH (LD: Alumno { matricula: "1003"}), (C3: Curso { codigo: "F001"} ) CREATE (LD)-[:CURSA { grupo: "2", nota_grupal: "10", nota_final: "10" } ]->(C3);
+MATCH (GR: Alumno { matricula: "1006"}), (C3: Curso { codigo: "F001"} ) CREATE (GR)-[:CURSA { grupo: "2", nota_grupal: "2", nota_final: "2" } ]->(C3);
+MATCH (LG: Alumno { matricula: "1007"}), (C3: Curso { codigo: "F001"} ) CREATE (LG)-[:CURSA { grupo: "3", nota_grupal: "10", nota_final: "10" } ]->(C3);
+MATCH (LP: Alumno { matricula: "1008"}), (C3: Curso { codigo: "F001"} ) CREATE (LP)-[:CURSA { grupo: "3", nota_grupal: "10", nota_final: "10" } ]->(C3);
+
+MATCH (GS: Alumno { matricula: "1001"}), (C4: Curso { codigo: "M001"} ) CREATE (GS)-[:CURSA { grupo: "1", nota_grupal: "9", nota_final: "9" } ]->(C4);
+MATCH (JG: Alumno { matricula: "1002"}), (C4: Curso { codigo: "M001"} ) CREATE (JG)-[:CURSA { grupo: "1", nota_grupal: "9", nota_final: "9" } ]->(C4);
+MATCH (LD: Alumno { matricula: "1003"}), (C4: Curso { codigo: "M001"} ) CREATE (LD)-[:CURSA { grupo: "2", nota_grupal: "10", nota_final: "10" } ]->(C4);
+MATCH (ED: Alumno { matricula: "1004"}), (C4: Curso { codigo: "M001"} ) CREATE (ED)-[:CURSA { grupo: "2", nota_grupal: "10", nota_final: "10" } ]->(C4);
+MATCH (MR: Alumno { matricula: "1005"}), (C5: Curso { codigo: "M002"} ) CREATE (MR)-[:CURSA { grupo: "1", nota_grupal: "10", nota_final: "10" } ]->(C5);
+MATCH (GR: Alumno { matricula: "1006"}), (C5: Curso { codigo: "M002"} ) CREATE (GR)-[:CURSA { grupo: "1", nota_grupal: "10", nota_final: "10" } ]->(C5);
+MATCH (LG: Alumno { matricula: "1007"}), (C5: Curso { codigo: "M002"} ) CREATE (LG)-[:CURSA { grupo: "2", nota_grupal: "8", nota_final: "8" } ]->(C5);
+MATCH (LP: Alumno { matricula: "1008"}), (C5: Curso { codigo: "M002"} ) CREATE (LP)-[:CURSA { grupo: "2", nota_grupal: "8", nota_final: "8" } ]->(C5);
+
+MATCH (JG: Alumno { matricula: "1002"}), (C6: Curso { codigo: "L001"} ) CREATE (JG)-[:CURSA { nota_final: "9" } ]->(C6);
+MATCH (LD: Alumno { matricula: "1003"}), (C6: Curso { codigo: "L001"} ) CREATE (LD)-[:CURSA { nota_final: "10" } ]->(C6);
+MATCH (MR: Alumno { matricula: "1005"}), (C7: Curso { codigo: "E001"} ) CREATE (MR)-[:CURSA { nota_final: "10" } ]->(C7);
+MATCH (GR: Alumno { matricula: "1006"}), (C7: Curso { codigo: "E001"} ) CREATE (GR)-[:CURSA { nota_final: "10" } ]->(C7);
+
+CREATE 
+ (P1: Persona { dni: "10000000", apellido: "Juarez", nombre: "Gustavo", fechanac: "10/11/1990" }),
+ (P2: Persona { dni: "10000001", apellido: "Suarez", nombre: "Jose", fechanac: "01/11/1980" }),
+ (P3: Persona { dni: "10000002", apellido: "Nieres", nombre: "Luis", fechanac: "31/11/1990" });
+
+CREATE 
+ (D1: Docente { legajo: "10001" }),
+ (D2: Docente { legajo: "10002" }),
+ (D3: Docente { legajo: "10003" }),
+ (D4: Docente { legajo: "10004" });
+
+MATCH (P1: Persona { dni: "10000000" }), (D1: Docente { legajo: "10001" }) CREATE (P1)-[:ES_UN { desde: "01/02/2018" } ]->(D1);
+MATCH (P2: Persona { dni: "10000001" }), (D2: Docente { legajo: "10002" }) CREATE (P2)-[:ES_UN { desde: "01/02/2018" } ]->(D2);
+MATCH (P3: Persona { dni: "10000002" }), (D3: Docente { legajo: "10003" }) CREATE (P3)-[:ES_UN { desde: "01/02/2019" } ]->(D3);
+MATCH (P4: Persona { dni: "99999999" }), (D4: Docente { legajo: "10004" }) CREATE (P4)-[:ES_UN { desde: "01/02/2021" } ]->(D4);
+
+MATCH (D1: Docente { legajo: "10001" }), (Q1: Curso { codigo: "Q001" }) CREATE (D1)-[:DICTA { caracter: "titular" } ]->(Q1);
+MATCH (D1: Docente { legajo: "10001" }), (F1: Curso { codigo: "F001" }) CREATE (D1)-[:DICTA { caracter: "titular" } ]->(F1);
+MATCH (D2: Docente { legajo: "10002" }), (M1: Curso { codigo: "M001" }) CREATE (D2)-[:DICTA { caracter: "titular" } ]->(M1);
+MATCH (D3: Docente { legajo: "10003" }), (Q2: Curso { codigo: "Q002" }) CREATE (D3)-[:DICTA { caracter: "titular" } ]->(Q2);
+MATCH (D3: Docente { legajo: "10003" }), (M2: Curso { codigo: "M001" }) CREATE (D3)-[:DICTA { caracter: "titular" } ]->(M2);
+MATCH (D4: Docente { legajo: "10004" }), (M2: Curso { codigo: "M001" }) CREATE (D4)-[:DICTA { caracter: "ayudante" } ]->(M2);
+MATCH (D1: Docente { legajo: "10001" }), (L1: Curso { codigo: "L001" }) CREATE (D1)-[:DICTA { caracter: "titular" } ]->(L1);
+MATCH (D1: Docente { legajo: "10001" }), (E1: Curso { codigo: "E001" }) CREATE (D1)-[:DICTA { caracter: "titular" } ]->(E1);
+
+MATCH (GS: Alumno { matricula: "1001" }), (JG: Alumno { matricula: "1002" }) CREATE (GS)-[:ES_CONTACTO_DE { desde: "01/02/2022" } ]->(JG);
+MATCH (GS: Alumno { matricula: "1001" }), (LD: Alumno { matricula: "1003" }) CREATE (GS)-[:ES_CONTACTO_DE { desde: "01/02/2022" } ]->(LD);
+MATCH (GS: Alumno { matricula: "1001" }), (GR: Alumno { matricula: "1006" }) CREATE (GS)-[:ES_CONTACTO_DE { desde: "01/02/2022" } ]->(GR);
+MATCH (GS: Alumno { matricula: "1001" }), (LG: Alumno { matricula: "1007" }) CREATE (GS)-[:ES_CONTACTO_DE { desde: "01/02/2022" } ]->(LG);
+MATCH (GR: Alumno { matricula: "1006" }), (MR: Alumno { matricula: "1005" }) CREATE (GR)-[:ES_CONTACTO_DE { desde: "01/02/2022" } ]->(MR);
+MATCH (GR: Alumno { matricula: "1006" }), (LP: Alumno { matricula: "1008" }) CREATE (GR)-[:ES_CONTACTO_DE { desde: "01/02/2022" } ]->(LP);

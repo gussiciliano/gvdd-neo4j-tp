@@ -1,0 +1,157 @@
+CREATE 
+ (C: Persona { apellido: "Corrado", nombre: "Gustavo", email: "gustavo.corrado@gmail.com", fechanac: "01/08/1966", pais: "Argentina" } ),
+ (D: Persona { apellido: "Diaz", nombre: "Analia", email: "adiaz@hotmail.com", fechanac: "10/12/1978", pais: "Argentina" } ),
+ (Do: Persona { apellido: "Dominguez", nombre: "Mariana", email: "mariana@yahoo.com", fechanac: "31/10/1990", pais: "Chile" } ),
+ (P: Persona { apellido: "Pereyra", nombre: "Claudio", email: "cpereyra30@yahoo.com.ar", fechanac: "18/05/1993", pais: "Estados Unidos" } ),
+ (L: Persona { apellido: "Lopez", nombre: "Mario", email: "mario.lopez@gmail.com", fechanac: "11/02/1970", pais: "Argentina" } ),
+ (F: Persona { apellido: "Ferreira", nombre: "Natalia", email: "nf@hotmail.com", fechanac: "07/04/1972", pais: "Argentina" } ),
+ (G: Persona { apellido: "Garcia", nombre: "Eduardo", email: "garcia@live.com.ar", fechanac: "23/01/1985", pais: "Chile" } ),
+ (Go: Persona { apellido: "Gonzalez", nombre: "Bibiana", email: "bibiana@live.com.ar", fechanac: "09/11/1974", pais: "España" } ),
+ (Lu: Persona { apellido: "Lupis", nombre: "Jorge", email: "jlup@gmail.com", fechanac: "27/09/1980", pais: "Argentina" } ),
+ (M: Persona { apellido: "Mendez", nombre: "Veronica", email: "veromendi@yahoo.com.ar", fechanac: "28/02/1968", pais: "Argentina" } );
+
+CREATE (e1: Empresa { id: "1", nombre: "Telefonica de Argentina", tamano: "Grande", rubro: "Telefonia", ubicacion: "Argentina" } ),
+ (e2: Empresa { id: "2", nombre: "Accenture", tamano: "Grande", rubro: "Consultoria", ubicacion: "Argentina" } ),
+ (e3: Empresa { id: "3", nombre: "CSF", tamano: "Chica", rubro: "Gestion de Informacion Farmaceutica", ubicacion: "Argentina" } ),
+ (e4: Empresa { id: "4", nombre: "Chevron", tamano: "Grande", rubro: "Petrolera", ubicacion: "Estados Unidos" } ),
+ (e5: Empresa { id: "5", nombre: "Lan", tamano: "Mediana", rubro: "Aviacion", ubicacion: "Chile" } ),
+ (e6: Empresa { id: "6", nombre: "Gomez & Asoc", tamano: "Chica", rubro: "Reventa", ubicacion: "España" } ),
+ (e7: Empresa { id: "7", nombre: "Alteon", tamano: "Mediana", rubro: "Capacitacion", ubicacion: "España" } ),
+ (e8: Empresa { id: "8", nombre: "IBM", tamano: "Grande", rubro: "IT", ubicacion: "Estados Unidos" } ),
+ (e9: Empresa { id: "9", nombre: "Banco Nacion", tamano: "Grande", rubro: "Banco", ubicacion: "Argentina" } ),
+ (e10: Empresa { id: "10", nombre: "Carrefour", tamano: "Grande", rubro: "Supermercado", ubicacion: "Argentina" } ),
+ (e11: Empresa { id: "11", nombre: "Claro", tamano: "Grande", rubro: "Telefonia", ubicacion: "Argentina" } );
+
+MATCH (Corrado: Persona { apellido: "Corrado"}), (e1: Empresa { id: "1"} ) CREATE (Corrado)-[:TRABAJO {fechad: "01/02/1997", fechah: "01/05/2000", puesto: "Programador" } ]->(e1);
+MATCH (Corrado: Persona { apellido: "Corrado"}), (e2: Empresa { id: "2"} ) CREATE (Corrado)-[:TRABAJO {fechad: "01/06/2000", fechah: "01/09/2008", puesto: "Analista Programador" } ]->(e2);
+MATCH (Corrado: Persona { apellido: "Corrado"}), (e9: Empresa { id: "9"} ) CREATE (Corrado)-[:TRABAJO {fechad: "01/10/2008",  puesto: "Analista Funcional" } ]->(e9);
+MATCH (Diaz: Persona { apellido: "Diaz"}), (e11: Empresa { id: "11"} ) CREATE (Diaz)-[:TRABAJO {fechad: "01/07/2011", puesto: "Lider de proyecto" } ]->(e11);
+MATCH (Dominguez: Persona { apellido: "Dominguez"}), (e9: Empresa { id: "9"} ) CREATE (Dominguez)-[:TRABAJO {fechad: "01/04/2001", fechah: "01/07/2001", puesto: "Abogado Jr." } ]->(e9);
+MATCH (Dominguez: Persona { apellido: "Dominguez"}), (e11: Empresa { id: "11"} ) CREATE (Dominguez)-[:TRABAJO {fechad: "01/08/2001", fechah: "01/11/2005", puesto: "Abogado Sr." } ]->(e11);
+MATCH (Dominguez: Persona { apellido: "Dominguez"}), (e5: Empresa { id: "5"} ) CREATE (Dominguez)-[:TRABAJO {fechad: "01/12/2005", puesto: "Supervisor area Legales" } ]->(e5);
+MATCH (Pereyra: Persona { apellido: "Pereyra"}), (e10: Empresa { id: "10"} ) CREATE (Pereyra)-[:TRABAJO {fechad: "01/03/2003", fechah: "01/05/2005", puesto: "Analista Funcional" } ]->(e10);
+MATCH (Pereyra: Persona { apellido: "Pereyra"}), (e8: Empresa { id: "8"} ) CREATE (Pereyra)-[:TRABAJO {fechad: "01/06/2005", fechah: "01/10/2009", puesto: "Jefe de Desarrollo" } ]->(e8);
+MATCH (Pereyra: Persona { apellido: "Pereyra"}), (e4: Empresa { id: "4"} ) CREATE (Pereyra)-[:TRABAJO {fechad: "01/11/2009", puesto: "Jefe de Desarrollo" } ]->(e4);
+MATCH (Lopez: Persona { apellido: "Lopez"}), (e10: Empresa { id: "10"} ) CREATE (Lopez)-[:TRABAJO {fechad: "01/03/1998", fechah: "01/11/2001", puesto: "Jefe de Marketing" } ]->(e10);
+MATCH (Lopez: Persona { apellido: "Lopez"}), (e9: Empresa { id: "9"} ) CREATE (Lopez)-[:TRABAJO {fechad: "01/12/2001", fechah: "01/03/2005", puesto: "Gerente de Marketing" } ]->(e9);
+MATCH (Lopez: Persona { apellido: "Lopez"}), (e11: Empresa { id: "11"} ) CREATE (Lopez)-[:TRABAJO {fechad: "01/04/2005", fechah: "01/03/2008", puesto: "Gerente de Marketing" } ]->(e11);
+MATCH (Lopez: Persona { apellido: "Lopez"}), (e9: Empresa { id: "9"} ) CREATE (Lopez)-[:TRABAJO {fechad: "01/04/2008", fechah: "01/10/2010", puesto: "Empresario" } ]->(e9);
+MATCH (Ferreira: Persona { apellido: "Ferreira"}), (e9: Empresa { id: "9"} ) CREATE (Ferreira)-[:TRABAJO {fechad: "01/05/2009", fechah: "01/11/2010", puesto: "Operador" } ]->(e9);
+MATCH (Garcia: Persona { apellido: "Garcia"}), (e5: Empresa { id: "5"} ) CREATE (Garcia)-[:TRABAJO {fechad: "01/09/2013", puesto: "Programador" } ]->(e5);
+MATCH (Gonzalez: Persona { apellido: "Gonzalez"}), (e3: Empresa { id: "3"} ) CREATE (Gonzalez)-[:TRABAJO {fechad: "01/07/2011", fechah: "01/09/2013", puesto: "Analista de Planificacion" } ]->(e3);
+MATCH (Gonzalez: Persona { apellido: "Gonzalez"}), (e6: Empresa { id: "6"} ) CREATE (Gonzalez)-[:TRABAJO {fechad: "01/10/2013", fechah: "01/12/2013", puesto: "Supervisor de Planificacion" } ]->(e6);
+MATCH (Gonzalez: Persona { apellido: "Gonzalez"}), (e7: Empresa { id: "7"} ) CREATE (Gonzalez)-[:TRABAJO {fechad: "01/01/2014", puesto: "Contador Sr" } ]->(e7);
+MATCH (Lupis: Persona { apellido: "Lupis"}), (e3: Empresa { id: "3"} ) CREATE (Lupis)-[:TRABAJO {fechad: "01/01/2014", puesto: "Gerente de desarrollo" } ]->(e3);
+MATCH (Mendez: Persona { apellido: "Mendez"}), (e2: Empresa { id: "2"} ) CREATE (Mendez)-[:TRABAJO {fechad: "01/12/1999", fechah: "01/10/2004", puesto: "DBA" } ]->(e2);
+MATCH (Mendez: Persona { apellido: "Mendez"}), (e1: Empresa { id: "1"} ) CREATE (Mendez)-[:TRABAJO {fechad: "01/01/2006", puesto: "DBA" } ]->(e1);
+
+CREATE (PH: Conocimiento { nombre: "PHP" } ),
+ (Ja: Conocimiento { nombre: "Java" } ),
+ (An: Conocimiento { nombre: "Analisis Funcional" } ),
+ (Ge: Conocimiento { nombre: "Gestion de proyectos" } ),
+ (Re: Conocimiento { nombre: "Revision y elaboracion de contratos" } ),
+ (Cr: Conocimiento { nombre: "Creacion de sociedades" } ),
+ (Co: Conocimiento { nombre: "Contestacion de demandas" } ),
+ (G: Conocimiento { nombre: "Gestion" } ),
+ (C: Conocimiento { nombre: "C++" } ),
+ (SQ: Conocimiento { nombre: "SQL" } ),
+ (Ev: Conocimiento { nombre: "Evaluacion de proveedores" } );
+
+CREATE (C: Conocimiento { nombre: "Control M" } ),
+ (Cr: Conocimiento { nombre: "Crontab" } ),
+ (T: Conocimiento { nombre: "Tavoli" } ),
+ (El: Conocimiento { nombre: "elaboracion de plan de negocios" } ),
+ (Ev: Conocimiento { nombre: "Evaluacion de proyectos" } ),
+ (E: Conocimiento { nombre: "elaboracion de balances" } ),
+ (Ge: Conocimiento { nombre: "Gestion de recursos" } ),
+ (Ad: Conocimiento { nombre: "Administracion Oracle" } ),
+ (Tu: Conocimiento { nombre: "Tuning Oracle" } ),
+ (Ba: Conocimiento { nombre: "Backup y Restore Oracle" } );
+
+
+MATCH (Corrado: Persona { apellido: "Corrado"}), (P: Conocimiento { nombre: "PHP"} ) CREATE (Corrado)-[:POSEE ]->(P);
+MATCH (Corrado: Persona { apellido: "Corrado"}), (J: Conocimiento { nombre: "Java"} ) CREATE (Corrado)-[:POSEE ]->(J);
+MATCH (Corrado: Persona { apellido: "Corrado"}), (A: Conocimiento { nombre: "Analisis Funcional"} ) CREATE (Corrado)-[:POSEE ]->(A);
+MATCH (Corrado: Persona { apellido: "Corrado"}), (C: Conocimiento { nombre: "C++"} ) CREATE (Corrado)-[:POSEE ]->(C);
+MATCH (Corrado: Persona { apellido: "Corrado"}), (S: Conocimiento { nombre: "SQL"} ) CREATE (Corrado)-[:POSEE ]->(S);
+MATCH (Diaz: Persona { apellido: "Diaz"}), (P: Conocimiento { nombre: "PHP"} ) CREATE (Diaz)-[:POSEE ]->(P);
+MATCH (Diaz: Persona { apellido: "Diaz"}), (J: Conocimiento { nombre: "Java"} ) CREATE (Diaz)-[:POSEE ]->(J);
+MATCH (Diaz: Persona { apellido: "Diaz"}), (A: Conocimiento { nombre: "Analisis Funcional"} ) CREATE (Diaz)-[:POSEE ]->(A);
+MATCH (Diaz: Persona { apellido: "Diaz"}), (G: Conocimiento { nombre: "Gestion de proyectos"} ) CREATE (Diaz)-[:POSEE ]->(G);
+MATCH (Diaz: Persona { apellido: "Diaz"}), (C: Conocimiento { nombre: "C++"} ) CREATE (Diaz)-[:POSEE ]->(C);
+MATCH (Diaz: Persona { apellido: "Diaz"}), (S: Conocimiento { nombre: "SQL"} ) CREATE (Diaz)-[:POSEE ]->(S);
+MATCH (Diaz: Persona { apellido: "Diaz"}), (E: Conocimiento { nombre: "Evaluacion de proveedores"} ) CREATE (Diaz)-[:POSEE ]->(E);
+MATCH (Dominguez: Persona { apellido: "Dominguez"}), (R: Conocimiento { nombre: "Revision y elaboracion de contratos"} ) CREATE (Dominguez)-[:POSEE ]->(R);
+MATCH (Dominguez: Persona { apellido: "Dominguez"}), (C: Conocimiento { nombre: "Creacion de sociedades"} ) CREATE (Dominguez)-[:POSEE ]->(C);
+MATCH (Dominguez: Persona { apellido: "Dominguez"}), (C: Conocimiento { nombre: "Contestacion de demandas"} ) CREATE (Dominguez)-[:POSEE ]->(C);
+MATCH (Dominguez: Persona { apellido: "Dominguez"}), (G: Conocimiento { nombre: "Gestion"} ) CREATE (Dominguez)-[:POSEE ]->(G);
+MATCH (Pereyra: Persona { apellido: "Pereyra"}), (J: Conocimiento { nombre: "Java"} ) CREATE (Pereyra)-[:POSEE ]->(J);
+MATCH (Pereyra: Persona { apellido: "Pereyra"}), (A: Conocimiento { nombre: "Analisis Funcional"} ) CREATE (Pereyra)-[:POSEE ]->(A);
+MATCH (Pereyra: Persona { apellido: "Pereyra"}), (G: Conocimiento { nombre: "Gestion de proyectos"} ) CREATE (Pereyra)-[:POSEE ]->(G);
+MATCH (Ferreira: Persona { apellido: "Ferreira"}), (C: Conocimiento { nombre: "Control M"} ) CREATE (Ferreira)-[:POSEE ]->(C);
+MATCH (Ferreira: Persona { apellido: "Ferreira"}), (C: Conocimiento { nombre: "Crontab"} ) CREATE (Ferreira)-[:POSEE ]->(C);
+MATCH (Ferreira: Persona { apellido: "Ferreira"}), (T: Conocimiento { nombre: "Tavoli"} ) CREATE (Ferreira)-[:POSEE ]->(T);
+MATCH (Garcia: Persona { apellido: "Garcia"}), (C: Conocimiento { nombre: "C++"} ) CREATE (Garcia)-[:POSEE ]->(C);
+MATCH (Garcia: Persona { apellido: "Garcia"}), (S: Conocimiento { nombre: "SQL"} ) CREATE (Garcia)-[:POSEE ]->(S);
+MATCH (Lupis: Persona { apellido: "Lupis"}), (J: Conocimiento { nombre: "Java"} ) CREATE (Lupis)-[:POSEE ]->(J);
+MATCH (Lupis: Persona { apellido: "Lupis"}), (A: Conocimiento { nombre: "Analisis Funcional"} ) CREATE (Lupis)-[:POSEE ]->(A);
+MATCH (Lupis: Persona { apellido: "Lupis"}), (G: Conocimiento { nombre: "Gestion de proyectos"} ) CREATE (Lupis)-[:POSEE ]->(G);
+MATCH (Lupis: Persona { apellido: "Lupis"}), (R: Conocimiento { nombre: "Revision y elaboracion de contratos"} ) CREATE (Lupis)-[:POSEE ]->(R);
+MATCH (Lupis: Persona { apellido: "Lupis"}), (E: Conocimiento { nombre: "Evaluacion de proveedores"} ) CREATE (Lupis)-[:POSEE ]->(E);
+MATCH (Lupis: Persona { apellido: "Lupis"}), (G: Conocimiento { nombre: "Gestion de recursos"} ) CREATE (Lupis)-[:POSEE ]->(G);
+MATCH (Mendez: Persona { apellido: "Mendez"}), (A: Conocimiento { nombre: "Administracion Oracle"} ) CREATE (Mendez)-[:POSEE ]->(A);
+MATCH (Mendez: Persona { apellido: "Mendez"}), (T: Conocimiento { nombre: "Tuning Oracle"} ) CREATE (Mendez)-[:POSEE ]->(T);
+MATCH (Mendez: Persona { apellido: "Mendez"}), (B: Conocimiento { nombre: "Backup y Restore Oracle"} ) CREATE (Mendez)-[:POSEE ]->(B);
+
+CREATE (In: Carrera { nombre: "Ing en Sistemas de Informacion", titulo: "Ingeniero en Sistemas de Informacion", nivel: "Universitario" } ),
+ (Li: Carrera { nombre: "Lic en Sist de Inf", titulo: "Licenciado en Sistemas de Informacion", nivel: "Universitario" } ),
+ (De: Carrera { nombre: "Derecho", titulo: "Abogado", nivel: "Universitario" } ),
+ (Co: Carrera { nombre: "Comercializacion", titulo: "Tecnico en Comercializacion", nivel: "Terciario" } ),
+ (MB: Carrera { nombre: "MBA", titulo: "Master en Business Administration", nivel: "Postgrado" } ),
+ (Te: Carrera { nombre: "Tec. En Programacion", titulo: "Tecnico en Programacion", nivel: "Terciario" } ),
+ (Ci: Carrera { nombre: "Ciencias Economicas", titulo: "Contador", nivel: "Universitario" } ),
+ (OC: Carrera { nombre: "OCA", titulo: "Oracle Certified Associate", nivel: "Terciario" } ),
+ (O: Carrera { nombre: "OCP", titulo: "Oracle Certified Professional", nivel: "Terciario" } );
+
+MATCH (Corrado: Persona { apellido: "Corrado"}), (I: Carrera { nombre: "Ing en Sistemas de Informacion"} ) CREATE (Corrado)-[:ESTUDIO { fechad: "01/03/1994", fechah: "01/12/2000", estado: "Completo" } ]->(I);
+MATCH (Diaz: Persona { apellido: "Diaz"}), (L: Carrera { nombre: "Lic en Sist de Inf"} ) CREATE (Diaz)-[:ESTUDIO { fechad: "01/04/1996", estado: "En curso" } ]->(L);
+MATCH (Dominguez: Persona { apellido: "Dominguez"}), (D: Carrera { nombre: "Derecho"} ) CREATE (Dominguez)-[:ESTUDIO { fechad: "01/04/1989", fechah: "01/12/1997", estado: "Completo" } ]->(D);
+MATCH (Pereyra: Persona { apellido: "Pereyra"}), (I: Carrera { nombre: "Ing en Sistemas de Informacion"} ) CREATE (Pereyra)-[:ESTUDIO { fechad: "01/03/2009", estado: "En curso" } ]->(I);
+MATCH (Lopez: Persona { apellido: "Lopez"}), (C: Carrera { nombre: "Comercializacion"} ) CREATE (Lopez)-[:ESTUDIO { fechad: "01/05/1997", fechah: "01/11/2001", estado: "Completo" } ]->(C);
+MATCH (Lopez: Persona { apellido: "Lopez"}), (M: Carrera { nombre: "MBA"} ) CREATE (Lopez)-[:ESTUDIO { fechad: "01/03/2002", fechah: "01/12/2005", estado: "Completo" } ]->(M);
+MATCH (Garcia: Persona { apellido: "Garcia"}), (T: Carrera { nombre: "Tec. En Programacion"} ) CREATE (Garcia)-[:ESTUDIO { fechad: "01/04/2012", estado: "En curso" } ]->(T);
+MATCH (Gonzalez: Persona { apellido: "Gonzalez"}), (L: Carrera { nombre: "Lic en Sist de Inf"} ) CREATE (Gonzalez)-[:ESTUDIO { fechad: "01/04/1996", fechah: "01/12/1999", estado: "Incompleto" } ]->(L);
+MATCH (Gonzalez: Persona { apellido: "Gonzalez"}), (C: Carrera { nombre: "Ciencias Economicas"} ) CREATE (Gonzalez)-[:ESTUDIO { fechad: "01/04/2000", fechah: "01/12/2007", estado: "Completo" } ]->(C);
+MATCH (Lupis: Persona { apellido: "Lupis"}), (I: Carrera { nombre: "Ing en Sistemas de Informacion"} ) CREATE (Lupis)-[:ESTUDIO { fechad: "01/02/1990", fechah: "01/12/1997", estado: "Completo" } ]->(I);
+MATCH (Lupis: Persona { apellido: "Lupis"}), (M: Carrera { nombre: "MBA"} ) CREATE (Lupis)-[:ESTUDIO { fechad: "01/04/2003", fechah: "01/12/2006", estado: "Completo" } ]->(M);
+
+CREATE (U: Institucion { nombre: "UTN FRBA", tipo: "Universidad", ubicacion: "Buenos Aires" } );
+CREATE (U: Institucion { nombre: "UBA Cs Es", tipo: "Universidad", ubicacion: "Buenos Aires" } );
+CREATE (U: Institucion { nombre: "UNC FD", tipo: "Universidad", ubicacion: "Cordoba" } );
+CREATE (U: Institucion { nombre: "UADE", tipo: "Universidad", ubicacion: "Buenos Aires" } );
+CREATE (U: Institucion { nombre: "Universidad de San Andres", tipo: "Universidad", ubicacion: "Buenos Aires" } );
+CREATE (U: Institucion { nombre: "UTN FRA", tipo: "Universidad", ubicacion: "Avellaneda" } );
+CREATE (O: Institucion { nombre: "Oracle Education", tipo: "Empresa", ubicacion: "Buenos Aires" } );
+
+
+MATCH (In: Carrera { nombre: "Ing en Sistemas de Informacion"}), (U: Institucion { nombre: "UTN FRBA"} ) CREATE (In)-[:DICTADA_EN ]->(U);
+MATCH (Li: Carrera { nombre: "Lic en Sist de Inf"}), (U: Institucion { nombre: "UBA Cs Es"} ) CREATE (Li)-[:DICTADA_EN ]->(U);
+MATCH (De: Carrera { nombre: "Derecho"}), (U: Institucion { nombre: "UNC FD"} ) CREATE (De)-[:DICTADA_EN ]->(U);
+MATCH (Co: Carrera { nombre: "Comercializacion"}), (U: Institucion { nombre: "UADE"} ) CREATE (Co)-[:DICTADA_EN ]->(U);
+MATCH (MB: Carrera { nombre: "MBA"}), (U: Institucion { nombre: "Universidad de San Andres"} ) CREATE (MB)-[:DICTADA_EN ]->(U);
+MATCH (Te: Carrera { nombre: "Tec. En Programacion"}), (U: Institucion { nombre: "UTN FRA"} ) CREATE (Te)-[:DICTADA_EN ]->(U);
+MATCH (Ci: Carrera { nombre: "Ciencias Economicas"}), (U: Institucion { nombre: "UBA Cs Es"} ) CREATE (Ci)-[:DICTADA_EN ]->(U);
+MATCH (OC: Carrera { nombre: "OCA"}), (O: Institucion { nombre: "Oracle Education"} ) CREATE (OC)-[:DICTADA_EN ]->(O);
+MATCH (OC: Carrera { nombre: "OCP"}), (O: Institucion { nombre: "Oracle Education"} ) CREATE (OC)-[:DICTADA_EN ]->(O);
+
+
+MATCH (Corrado: Persona { apellido: "Corrado"}), (M: Persona { apellido: "Mendez"} ) 
+CREATE (Corrado)-[:CONOCE_A { fechad: "2000", motivo: "Trabajo" } ]->(M);
+MATCH (Corrado: Persona { apellido: "Corrado"}), (L: Persona { apellido: "Lupis"} ) 
+CREATE (Corrado)-[:CONOCE_A { fechad: "1994", motivo: "Estudio" } ]->(L);
+MATCH (Corrado: Persona { apellido: "Corrado"}), (D: Persona { apellido: "Dominguez"} ) 
+CREATE (Corrado)-[:CONOCE_A { fechad: "1990", motivo: "Amistad" } ]->(D);
+MATCH (Lupis: Persona { apellido: "Lupis"}), (L: Persona { apellido: "Lopez"} ) 
+CREATE (Lupis)-[:CONOCE_A { fechad: "1994", motivo: "Estudio" } ]->(L);
+MATCH (Lopez: Persona { apellido: "Lopez"}), (D: Persona { apellido: "Gonzalez"} ) 
+CREATE (Lopez)-[:CONOCE_A { fechad: "1990", motivo: "Amistad" } ]->(D);
