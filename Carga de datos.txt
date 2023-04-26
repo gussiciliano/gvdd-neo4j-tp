@@ -121,7 +121,7 @@ MATCH (D4: Docente { legajo: "10004" }), (M2: Curso { codigo: "M001" }) CREATE (
 MATCH (D1: Docente { legajo: "10001" }), (L1: Curso { codigo: "L001" }) CREATE (D1)-[:DICTA { caracter: "titular" } ]->(L1);
 MATCH (D1: Docente { legajo: "10001" }), (E1: Curso { codigo: "E001" }) CREATE (D1)-[:DICTA { caracter: "titular" } ]->(E1);
 
-MATCH (GS: Alumno { matricula: "1001" }), (JG: Alumno { matricula: "1002" }) CREATE (GS)-[:ES_CONTACTO_DE { desde: "01/02/2022" } ]->(JG);
+MATCH (GS: Alumno { matricula: "1001" }), (JG: Alumno { matricula: "1002" }) CREATE (GS)-[:  { desde: "01/02/2022" } ]->(JG);
 MATCH (GS: Alumno { matricula: "1001" }), (LD: Alumno { matricula: "1003" }) CREATE (GS)-[:ES_CONTACTO_DE { desde: "01/02/2022" } ]->(LD);
 MATCH (GS: Alumno { matricula: "1001" }), (GR: Alumno { matricula: "1006" }) CREATE (GS)-[:ES_CONTACTO_DE { desde: "01/02/2022" } ]->(GR);
 MATCH (GS: Alumno { matricula: "1001" }), (LG: Alumno { matricula: "1007" }) CREATE (GS)-[:ES_CONTACTO_DE { desde: "01/02/2022" } ]->(LG);

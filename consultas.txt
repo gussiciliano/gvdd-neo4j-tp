@@ -1,13 +1,53 @@
-Listado de alumnos que cursaron materias juntos, pero en esta materia son de distintos
+1. Listado de alumnos que cursaron materias juntos, pero en esta materia son de distintos
 grupos.
 
-MATCH (p:Persona) -[rPA:ES_UN]->(a:Alumno) -[r:CURSA]->(c:Curso)
-RETURN p.apellido, p.nombre, a.matricula, r.grupo, c.codigo
-ORDER BY c.codigo, r.grupo
+MATCH (p:Persona) -[rPA:ES_UN]->(a:Alumno) -[r:CURSA]->()<-[r2:CURSA]-(a2:Alumno)<-[rPA2:ES_UN]-(p2:Persona)
+WHERE id(p) <> id(p2) AND r.grupo <> r2.grupo
+RETURN DISTINCT p.apellido, p.nombre, p2.apellido, p2.nombre
 
-Listado de docentes que dictaron más de una materia.
+2. Listado de docentes que dictaron más de una materia.
 
 MATCH (p:Persona) -[rPD:ES_UN]->(d:Docente) -[rDC:DICTA]->(c:Curso)
 with p, count(rDC) as cantidadCursos
 where cantidadCursos > 1
 RETURN p.apellido, p.nombre, cantidadCursos 
+
+3. Tu propio promedio de calificaciones
+
+MATCH (p:Persona) -[rPA:ES_UN]->(a:Alumno) -[rAC:CURSA]->(c:Curso)
+RETURN p.apellido, p.nombre, avg(toInteger(rAC.nota_final)) AS promedio
+
+4. Listado para recomendación de alumnos que cursaron en el mismo curso y cuatrimestre pero no se conocen entre sí
+
+MATCH (p:Persona) -[rPA:ES_UN]->(a:Alumno) -[rAC:CURSA]->()<-[rAC2:CURSA]-(a2:Alumno)<-[rPA2:ES_UN]-(p2:Persona) 
+WHERE id(p) <> id(p2) AND NOT (a)-[:ES_CONTACTO_DE]-(a2)
+RETURN DISTINCT p.apellido, p.nombre, p2.apellido, p2.nombre
+
+5. Listado de los conocidos de tus conocidos, hasta longitud 2, e indefinida
+
+MATCH (p:Persona) -[rPA:ES_UN]->(a:Alumno) -[rC:ES_CONTACTO_DE]->(a2:Alumno)-[rC2:ES_CONTACTO_DE]->(a3:Alumno)-[rPA2:ES_UN]- (p2:Persona)
+RETURN p.apellido, p.nombre, p2.apellido, p2.nombre
+
+6. Apellido y nombre de alumnos que también son docentes (ver pedido adicional para esta consulta)
+
+MATCH (a:Alumno)-[rPA:ES_UN]-(p:Persona)-[rPD:ES_UN]->(d:Docente)
+RETURN p.apellido, p.nombre
+
+7. Dado un alumno en particular, se quiere obtener el listado de materias electivas que no haya cursado, en base al criterio de haber sido cursadas por otros alumnos que cursaron por lo menos una en común con él
+
+MATCH (p:Persona) -[rPA:ES_UN]->(a:Alumno) -[rAC:CURSA]->(c:Curso)-[rCO:OFERTA]-(m:Materia)
+WHERE a.matricula<>"1001" AND m.tipo="optativa"
+RETURN DISTINCT c, a, m
+
+8. Hacer una variante del ítem anterior, recomendando sólo si el otro alumno es un contacto (directo o indirecto)
+
+MATCH (m:Materia)-[rOC:OFERTA]-(c:Curso)-[rAC:CURSA]-(a:Alumno)-[rCon:ES_CONTACTO_DE]-(aTarget:Alumno)
+WHERE m.tipo="optativa" AND aTarget.matricula="1001"
+RETURN distinct c
+
+9. Traer las materias que ofrecen un curso en el primer cuatrimestre del año 2022
+
+MATCH (m:Materia)-[rOC:OFERTA]->(c:Curso)-[CS:SE_DICTA_EN]->(cc:Cuatrimestre)
+WHERE cc.cuatrimestre="1" AND cc.anio="2022"
+RETURN distinct m
+
